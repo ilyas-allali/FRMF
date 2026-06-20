@@ -41,8 +41,16 @@ img { display: block; max-width: 100%; }
 .preloader-wordmark span { display: block; }
 .preloader-status { position: absolute; z-index: 3; right: 3rem; bottom: 2.5rem; left: 3rem; display: grid; grid-template-columns: auto 1fr 44px; align-items: center; gap: 1.5rem; color: rgba(255,255,255,.55); font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; }
 .preloader-status > div { height: 1px; background: rgba(255,255,255,.13); }
-.preloader-status i { display: block; width: 100%; height: 1px; background: var(--gold); transform-origin: left; transition: transform .08s linear; }
+.preloader-status i { position: relative; display: block; width: 100%; height: 1px; background: var(--gold); transform-origin: left; transition: transform .08s linear; }
+.preloader-status i::after { position: absolute; top: -2px; right: 0; width: 6px; height: 5px; content: ""; border-radius: 50%; background: var(--gold); box-shadow: 0 0 8px var(--gold), 0 0 15px var(--gold); filter: blur(0.5px); }
 .preloader-status strong { color: var(--gold); font: 500 .7rem Syne; text-align: right; }
+
+/* Enhanced Visual Preloader Elements */
+.preloader-swipe-layer { position: fixed; z-index: 9999; inset: 0; background: var(--crimson); pointer-events: none; }
+.preloader-pulse-ring { position: absolute; z-index: 1; width: min(85vw, 680px); aspect-ratio: 1; border-radius: 50%; border: 2px solid rgba(197, 160, 89, 0.4); filter: drop-shadow(0 0 15px rgba(197, 160, 89, 0.2)); pointer-events: none; }
+.preloader-glow-ring { position: absolute; inset: -15px; border-radius: 50%; background: radial-gradient(circle, rgba(197,160,89,0.18) 0%, transparent 70%); filter: blur(10px); animation: preloaderPulseGlow 3s ease-in-out infinite alternate; pointer-events: none; }
+@keyframes preloaderPulseGlow { from { transform: scale(0.94); opacity: 0.55; } to { transform: scale(1.06); opacity: 0.95; } }
+.preloader-arabic-wordmark { position: absolute; z-index: 1; bottom: 18%; color: var(--gold); font: 500 clamp(2.2rem, 5.5vw, 4.4rem) Syne; opacity: 0.08; text-transform: uppercase; font-family: "Syne", sans-serif; pointer-events: none; }
 
 .brand-mark { display: flex; align-items: center; gap: .75rem; width: max-content; }
 .brand-mark img { width: 35px; height: 46px; object-fit: contain; }
