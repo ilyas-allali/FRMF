@@ -1,0 +1,1 @@
+{"root":["./src/App.tsx","./src/main.tsx","./src/components/BrandMark.tsx","./src/components/Heritage.tsx","./src/components/Hero.tsx","./src/components/LegacyStory.tsx","./src/components/Nav.tsx","./src/components/PlayerCard.tsx","./src/components/Preloader.tsx","./src/components/Roster.tsx","./src/components/SquadTimeline.tsx","./src/data/squad.ts"],"version":"5.9.3"}
