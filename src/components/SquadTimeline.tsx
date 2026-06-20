@@ -13,25 +13,21 @@ export function SquadTimeline() {
 
   useLayoutEffect(() => {
     const context = gsap.context(() => {
-      const media = gsap.matchMedia();
-      media.add("(min-width: 768px)", () => {
-        const getTravel = () => Math.max(0, (track.current?.scrollWidth ?? 0) - window.innerWidth);
-        gsap.to(track.current, {
-          x: () => -getTravel(),
-          ease: "none",
-          scrollTrigger: {
-            trigger: section.current,
-            start: "top top",
-            end: () => `+=${getTravel() + window.innerWidth * 0.7}`,
-            pin: true,
-            scrub: 0.9,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-            onUpdate: (self) => setActive(Math.min(featuredPlayers.length - 1, Math.round(self.progress * (featuredPlayers.length - 1)))),
-          },
-        });
+      const getTravel = () => Math.max(0, (track.current?.scrollWidth ?? 0) - window.innerWidth);
+      gsap.to(track.current, {
+        x: () => -getTravel(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: section.current,
+          start: "top top",
+          end: () => `+=${getTravel() + window.innerWidth * 0.7}`,
+          pin: true,
+          scrub: 0.9,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => setActive(Math.min(featuredPlayers.length - 1, Math.round(self.progress * (featuredPlayers.length - 1)))),
+        },
       });
-      return () => media.revert();
     }, section);
     return () => context.revert();
   }, []);

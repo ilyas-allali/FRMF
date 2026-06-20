@@ -211,9 +211,24 @@ img { display: block; max-width: 100%; }
   .preloader-wordmark { font-size: 20vw; }
   .preloader-emblem { width: 180px; }
   .preloader-status { right: 1.25rem; bottom: 1.5rem; left: 1.25rem; grid-template-columns: auto 1fr 35px; gap: .75rem; }
+  
+  /* Navigation */
   .nav-shell { grid-template-columns: 1fr auto; padding: 1rem 1.25rem; }
   .nav-links, .nav-edition { display: none; }
   .menu-trigger { display: block; }
+
+  /* Mobile menu animations */
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+  @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+  @keyframes slideDown { from { transform: translateY(0); } to { transform: translateY(100%); } }
+
+  .menu-overlay[data-state="open"] { animation: fadeIn 0.4s ease forwards; }
+  .menu-overlay[data-state="closed"] { animation: fadeOut 0.3s ease forwards; }
+  .menu-content[data-state="open"] { animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .menu-content[data-state="closed"] { animation: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+  /* Hero Section */
   .hero { padding: 8rem 1.25rem 4rem; }
   .hero-grid { background-size: 20vw 20vw; }
   .hero-orbit--one { right: -45vw; width: 120vw; }
@@ -222,25 +237,29 @@ img { display: block; max-width: 100%; }
   .eyebrow span:last-child { display: none; }
   .hero h1 { font-size: clamp(4.6rem, 24vw, 7rem); line-height: .78; }
   .hero-title-outline { padding-left: 0; }
-  .hero-lower { width: 100%; margin: 2.2rem 0 0; }
+  .hero-lower { display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem; width: 100%; margin: 2.2rem 0 0; }
   .hero-arabic { font-size: 1.4rem; }
   .scroll-cue { right: 1rem; }
-  .timeline { height: auto; min-height: 100svh; overflow: visible; padding: 7rem 0 5rem; }
+
+  /* Squad Timeline Section (Animated Mobile Pinning) */
+  .timeline { position: relative; height: 100svh; overflow: hidden; background: #090a0e; perspective: 1400px; padding: 0; }
   .timeline-head { top: 2.5rem; right: 1.25rem; left: 1.25rem; }
   .timeline-head > p:last-child { display: none; }
-  .timeline-progress { display: none; }
-  .timeline-track { width: auto; height: auto; gap: 1rem; padding: 0 1.25rem 2rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
-  .timeline-track::-webkit-scrollbar { display: none; }
-  .timeline-intro { display: grid; align-content: center; min-width: 86vw; height: 70svh; scroll-snap-align: center; }
+  .timeline-progress { display: block; position: absolute; z-index: 6; right: 1.25rem; bottom: 2rem; left: 1.25rem; height: 1px; background: rgba(255,255,255,.12); }
+  .timeline-track { display: flex; align-items: center; gap: 6vw; width: max-content; height: 100%; padding: 4rem 15vw 2rem 1.25rem; will-change: transform; transform-style: preserve-3d; overflow-x: visible; scroll-snap-type: none; }
+  .timeline-intro { display: grid; align-content: center; min-width: 80vw; width: 80vw; height: 60svh; }
   .timeline-intro h2 { font-size: 3.1rem; }
-  .player-card { min-width: 86vw; width: 86vw; height: 70svh; opacity: 1; filter: none; scroll-snap-align: center; }
+  .player-card { min-width: 80vw; width: 80vw; height: 64svh; opacity: .4; filter: saturate(.6) brightness(.7); transition: opacity .5s, filter .5s; }
+  .player-card.is-active { opacity: 1; filter: none; }
   .card-copy { right: 1.1rem; bottom: 1.2rem; left: 1.1rem; }
   .card-copy h3 { font-size: clamp(2.5rem, 13vw, 4rem); }
   .card-meta { display: grid; }
   .card-meta span + span { padding: 0; border: 0; }
   .card-metric { top: 4.5rem; left: 1.2rem; }
   .card-action { display: none; }
-  .timeline-outro { min-width: 80vw; width: 80vw; height: 70svh; scroll-snap-align: center; }
+  .timeline-outro { min-width: 80vw; width: 80vw; height: 60svh; }
+
+  /* Legacy Story Section */
   .afcon-monument { min-height: 100svh; padding: 7rem 1.25rem 10rem; }
   .afcon-copy h2 { font-size: clamp(4.6rem, 23vw, 7rem); }
   .afcon-rings { right: -45vw; width: 125vw; }
@@ -249,22 +268,39 @@ img { display: block; max-width: 100%; }
   .afcon-years > div:last-child { text-align: right; }
   .qatar-story { min-height: auto; padding: 7rem 1.25rem; }
   .qatar-story::after { background: linear-gradient(0deg, #08090c 10%, rgba(5,6,9,.5), rgba(5,6,9,.72)); }
-  .qatar-image { inset: 0; height: 100%; }
+  .qatar-image { inset: -10% 0; height: 120%; }
   .qatar-heading { width: 100%; }
   .qatar-heading h2 { font-size: clamp(3.6rem, 17vw, 5.5rem); }
   .qatar-run { width: 100%; margin-top: 6rem; }
-  .qatar-run article { grid-template-columns: 32px 1fr; }
-  .qatar-run article > strong { display: none; }
+  .qatar-run article { grid-template-columns: 35px 1fr auto; gap: 1rem; }
+  .qatar-run article > strong { display: block; font-size: 1.4rem; color: rgba(255,255,255,.3); }
+
+  /* Roster Section */
   .section-title { display: grid; margin-bottom: 3rem; }
   .section-title h2 { font-size: 4.5rem; }
   .roster-filters { overflow-x: auto; }
   .roster-filters button { flex: 0 0 auto; }
   .roster-grid { grid-template-columns: 1fr; }
   .roster-row, .roster-row:nth-child(2n) { border-right: 0; }
-  .roster-row { grid-template-columns: 35px 1fr; }
-  .roster-row small { display: none; }
-  .heritage-list article { grid-template-columns: 35px 1fr auto; min-height: 96px; }
-  .heritage-list article small { display: none; }
+  .roster-row { grid-template-columns: 35px 1fr auto; gap: 1.2rem; }
+  .roster-row small { display: block; font-size: 0.58rem; color: rgba(255,255,255,.4); }
+
+  /* Heritage Section */
+  .heritage-list article {
+    display: grid;
+    grid-template-columns: 35px 1fr;
+    gap: 0.5rem 1rem;
+    padding: 1.5rem 0;
+    align-items: start;
+    min-height: auto;
+    border-bottom: 1px solid rgba(255,255,255,.28);
+  }
+  .heritage-list article span { grid-column: 1; grid-row: 1 / span 3; font-size: 0.75rem; margin-top: 0.2rem; }
+  .heritage-list article h3 { grid-column: 2; grid-row: 1; font-size: 1.4rem; margin: 0; }
+  .heritage-list article p { grid-column: 2; grid-row: 2; margin: 0; font-size: 0.8rem; color: var(--gold); }
+  .heritage-list article small { display: block; grid-column: 2; grid-row: 3; font-size: 0.75rem; color: rgba(255,255,255,0.6); }
+
+  /* Footer */
   .footer { grid-template-columns: 1fr; align-items: start; min-height: auto; }
 }
 
